@@ -1,0 +1,46 @@
+
+:root {
+	--main-turquoise: #40E0D0;
+	--main-light-green: #35C674;
+}
+
+div[data-file-uploader] {
+	min-height: 80px;
+	border-style: dashed;
+	border-color: #00000082;
+	transition: border-color 300ms ease;
+	cursor: pointer;
+	position: relative;
+	display: grid;
+	user-select: none;
+	pointer-events: auto;
+}
+
+div[data-file-uploader].active {
+	border-color: #000000d6;
+}
+
+div[data-file-uploader]:hover {
+	border-color: #000000d6;
+}
+
+div[data-file-uploader] > img {
+	width: 10%;
+	margin: auto;
+ 	opacity: .5;
+	transition: transform 300ms ease;
+	user-select: none;
+	pointer-events: none;
+}
+
+div[data-file-uploader]:hover > img {
+	transform: scale(1.05);
+	opacity: .8;
+}
+
+div[data-file-uploader] > input[type="file"] {
+	display: none;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}

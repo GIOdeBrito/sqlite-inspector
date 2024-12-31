@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    app:
+        image: sqlite-inspector:latest
+        container_name: sqlite-inspector-container
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "3000:80"
+        tty: true
