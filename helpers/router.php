@@ -102,6 +102,12 @@ class Router
 		{
 			$position = $params[$i]['pos'];
 
+			// To prevent out of bounds error
+			if(!isset($params[$i]) || !isset($uri_arr[$position]))
+			{
+				continue;
+			}
+
 			// Sets the parameter's value equals the uri's
 			$params[$i]['value'] = $uri_arr[$position];
 
@@ -110,7 +116,7 @@ class Router
 		}
 
 		// If there is difference between them, returns false
-		if(count(array_diff($uri_arr, $cmpuri_arr)) !== 0)
+		if($cmpuri_arr !== $uri_arr)
 		{
 			return false;
 		}
