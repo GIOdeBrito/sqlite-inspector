@@ -10,7 +10,7 @@ window.onload = () =>
 	{
 		const options = {
 			accepts: ["application/octet-stream"],
-			url: "/api/v1/sendfile/test/",
+			url: "/api/v1/sendfile/test",
 			sendoninput: true
 		};
 

@@ -1,6 +1,6 @@
 <?php
 
-/* Base page layout */
+/* Layout */
 
 ?>
 <!DOCTYPE html>
@@ -16,6 +16,10 @@
 </head>
 
 <body>
-	<?php self::render_body(); ?>
+	<?php
+
+	require "src/views/${view}.php";
+
+	?>
 </body>
 </html>

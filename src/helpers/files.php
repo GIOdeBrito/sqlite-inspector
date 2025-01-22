@@ -7,7 +7,7 @@ function get_file_random_name (string $name): string
 	return date('Ymd_his').'.'.$ext;
 }
 
-function get_http_files (): object
+function get_http_files (): object[]|object
 {
 	$uploaded_files = $_FILES['uploaded_file'];
 	$filecount = count($uploaded_files['name']);
@@ -17,6 +17,7 @@ function get_http_files (): object
 	for($i = 0; $i < $filecount; $i++)
 	{
 		$object = new UploadedFileModel();
+		
 		$object->name 		= $uploaded_files['name'][$i];
 		$object->fullpath 	= $uploaded_files['full_path'][$i];
 		$object->type 		= $uploaded_files['type'][$i];
@@ -27,10 +28,8 @@ function get_http_files (): object
 		array_push($objectarray, $object);
 	}
 
-	/**
-	* If there is only a single object, then
-	* returns the object alone instead of an array
-	*/
+	/* If there is only a single object, then
+	returns the first object instead of an array */
 	if(count($objectarray) === 1)
 	{
 		return $objectarray[0];
@@ -49,7 +48,7 @@ function empty_uploads_folder (): void
 	}
 }
 
-function move_file_to_destination (UploadedFileModel $file): bool
+function move_file_touploads (UploadedFileModel $file): bool
 {
 	if(!is_uploaded_file($file->tempname))
 	{

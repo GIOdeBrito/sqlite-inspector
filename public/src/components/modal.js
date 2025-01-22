@@ -83,7 +83,7 @@ class Modal
 
     async #fetchContent ()
     {
-        let data = await fetch('/api/v1/getmodal/?name=' + this.#view);
+        let data = await fetch('/api/v1/getmodal/' + this.#view);
         let content = await data.text();
 
         this.#root.innerHTML = content;

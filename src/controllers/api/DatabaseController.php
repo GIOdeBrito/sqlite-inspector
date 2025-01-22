@@ -1,7 +1,6 @@
 <?php
 
-require 'helpers/database.php';
-require_once 'helpers/web_response.php';
+require 'src/helpers/database.php';
 
 class DatabaseController
 {
@@ -25,7 +24,7 @@ class DatabaseController
 			array_push($tables, $item['name']);
 		}
 
-		json_response([ 'tables' => $tables ], 200);
+		//json_response([ 'tables' => $tables ], 200);
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-require 'helpers/files.php';
+require 'src/helpers/files.php';
 
 class UploadController
 {
@@ -17,7 +17,7 @@ class UploadController
 			die();
 		}
 
-		echo json_encode([ 'success' => move_file_to_destination($file) ]);
+		echo json_encode([ 'success' => move_touploads_folder($file) ]);
 	}
 }
 

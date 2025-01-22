@@ -2,7 +2,7 @@
 
 class GetModalController
 {
-	public static function return_modal_content ()
+	public static function return_modal_content (Request $req, Response $res)
 	{
 		if(!isset($_GET['name']))
 		{
@@ -14,7 +14,7 @@ class GetModalController
 
 		switch($name)
 		{
-			case 'welcome': require 'views/modals/welcome_content.php'; break;
+			case 'welcome': require 'src/views/modals/welcome_content.php'; break;
 		}
 
 		die();
