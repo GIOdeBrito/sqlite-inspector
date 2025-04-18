@@ -4,6 +4,10 @@
 	--main-light-green: #35C674;
 }
 
+a {
+	text-decoration: none;
+}
+
 div[data-file-uploader] {
 	min-height: 80px;
 	border-style: dashed;

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http;
+
 class Request
 {
 	private string $method = "";
@@ -9,7 +11,7 @@ class Request
 	public function __construct ()
 	{
 		$this->method = strtoupper($_SERVER["REQUEST_METHOD"]);
-		$this->uri = $_SERVER["REQUEST_URI"];
+		$this->uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 	}
 
 	public function __get (string $name): mixed
@@ -29,7 +31,7 @@ class Request
 
 	private function uri (): string
 	{
-		return parse_url($this->uri, PHP_URL_PATH);
+		return $this->uri;
 	}
 
 	private function params (): object|null

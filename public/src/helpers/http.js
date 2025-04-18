@@ -1,42 +1,71 @@
 
 /**
-* Makes a simple http request to get or post data to an endpoint.
-* @param {string} url
-* @param {Object} args
-* @param {string[]} files
-* @returns {string}
-*/
-function httpPost (url, args = Object(), files = Array())
+ * Make a simple http request to post form data to an endpoint.
+ * @param {string} url
+ * @param {object} args
+ * @param {FileList[]} files
+ * @returns {Promise<object | string>}
+ */
+async function httpPostForm (url, args = Object(), files = Array())
 {
-    const fdata = new FormData();
+	const fdata = new FormData();
 
-    fdata.append('args', JSON.stringify(args));
+	fdata.append('args', JSON.stringify(args));
 
-    // Append files
-    if(files.length > 0)
-    {
-        Array.from(files).forEach(file => fdata.append('uploaded_file[]', file));
-    }
+	// Append files
+	if(files.length > 0)
+	{
+		Array.from(files).forEach(file => fdata.append('uploaded_file[]', file));
+	}
 
-    const xmlreq = new XMLHttpRequest();
+	let response = await fetch(url,
+	{
+		"method": "POST",
+		"Content-Type": "multipart/form-data",
+		"body": fdata
+	});
 
-    xmlreq.open('POST', url, true);
-    xmlreq.send(fdata);
-
-    return new Promise(resolve =>
-    {
-        xmlreq.onload = (res) => resolve(res.target.responseText);
-    });
+	return parseResponse(response);
 }
 
 /**
-* Performs a simple http request that fetchs a resource.
-* @param {string} url
-* @returns {object | string}
-*/
+ * Makes a simple http post.
+ * @param {string} url
+ * @param {object} body
+ * @returns {Promise<object | string>}
+ */
+async function httpPost (url, body = Object(), files = Array())
+{
+	let response = await fetch(url,
+	{
+		"method": "POST",
+		"Content-Type": "application/json",
+		"body": JSON.stringify(body)
+	});
+
+	return parseResponse(response);
+}
+
+/**
+ * Performs a simple http request that fetchs a resource.
+ * @param {string} url
+ * @returns {Promise<object | string>}
+ */
 async function httpGet (url = String())
 {
 	let response = await fetch(url);
+
+	return parseResponse(response);
+}
+
+/**
+ * Retrieves the data from the fetch response.
+ * @param {Response} response
+ * @returns {Promise<object | string>}
+ */
+async function parseResponse (response)
+{
+	let responseClone = response.clone();
 
 	try
 	{
@@ -44,11 +73,12 @@ async function httpGet (url = String())
 	}
 	catch(ex)
 	{
-		return await response.json();
+		return await responseClone.json();
 	}
 }
 
 export {
-    httpPost,
+	httpPost,
+	httpPostForm,
 	httpGet
 }

@@ -17,7 +17,7 @@ class UploadController
 			die();
 		}
 
-		echo json_encode([ 'success' => move_touploads_folder($file) ]);
+		echo json_encode([ 'success' => move_file_touploads($file) ]);
 	}
 }
 

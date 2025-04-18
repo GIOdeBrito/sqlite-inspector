@@ -4,7 +4,7 @@ require 'src/helpers/database.php';
 
 class DatabaseController
 {
-	public static function get_table_names ()
+	public static function get_table_names (Request $req, Response $res): void
 	{
 		$dbpath = glob('../uploads/*.db');
 
@@ -24,7 +24,7 @@ class DatabaseController
 			array_push($tables, $item['name']);
 		}
 
-		//json_response([ 'tables' => $tables ], 200);
+		$res->json($tables);
 	}
 }
 

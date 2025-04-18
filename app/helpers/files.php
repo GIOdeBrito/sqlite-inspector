@@ -7,7 +7,7 @@ function get_file_random_name (string $name): string
 	return date('Ymd_his').'.'.$ext;
 }
 
-function get_http_files (): object[]|object
+function get_http_files (): array|object
 {
 	$uploaded_files = $_FILES['uploaded_file'];
 	$filecount = count($uploaded_files['name']);
@@ -17,7 +17,7 @@ function get_http_files (): object[]|object
 	for($i = 0; $i < $filecount; $i++)
 	{
 		$object = new UploadedFileModel();
-		
+
 		$object->name 		= $uploaded_files['name'][$i];
 		$object->fullpath 	= $uploaded_files['full_path'][$i];
 		$object->type 		= $uploaded_files['type'][$i];

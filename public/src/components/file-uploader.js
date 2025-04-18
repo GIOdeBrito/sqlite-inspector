@@ -1,6 +1,6 @@
 
 import FileUploaderManager from "../managers/file-uploader-manager.js";
-import { httpPost } from "../helpers/http.js";
+import { httpPostForm } from "../helpers/http.js";
 
 class FileUploader
 {
@@ -70,7 +70,7 @@ class FileUploader
 
 		this.#beforesendfunc();
 
-		let response = await httpPost(this.#options.url, this.#options.httpobj, this.#fileinput.files);
+		let response = await httpPostForm(this.#options.url, this.#options.httpobj, this.#fileinput.files);
 
 		this.#aftersendfunc(response);
 	}

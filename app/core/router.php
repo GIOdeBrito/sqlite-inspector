@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Core;
+
+use App\Http\Request;
+use App\Http\Response;
+
 class Router
 {
 	private ?array $routes = NULL;
@@ -12,7 +17,7 @@ class Router
 		];
 	}
 
-	public function add_route (string $method, string $route, object|string $callback): void
+	public function add_route (string $method, string $route, object|string|array $callback): void
 	{
 		if(!array_key_exists($method, $this->routes))
 		{
@@ -52,9 +57,10 @@ class Router
 			$route = $key;
 		}
 
+		// If route does not exists, redirects user to the 404 page
 		if(is_null($route))
 		{
-			$res->redirect("/");
+			$res->redirect("/404");
 		}
 
 		$this->routes[$req->method][$route]($req, $res);
