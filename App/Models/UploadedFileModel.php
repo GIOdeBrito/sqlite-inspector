@@ -9,7 +9,7 @@ class UploadedFileModel
 	public ?string $error = NULL;
 	public ?string $size = NULL;
 
-	public function get_size_in_megabytes (): int
+	public function getSizeInMegabytes (): int
 	{
 		return $this->size * 1024 * 1024;
 	}

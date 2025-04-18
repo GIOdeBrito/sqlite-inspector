@@ -4,7 +4,7 @@ require 'src/helpers/database.php';
 
 class DatabaseController
 {
-	public static function get_table_names (Request $req, Response $res): void
+	public static function getTableNames (Request $req, Response $res): void
 	{
 		$dbpath = glob('../uploads/*.db');
 

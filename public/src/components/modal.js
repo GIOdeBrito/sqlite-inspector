@@ -1,7 +1,6 @@
 
 import Point from "../models/point.js";
 import ModalManager from "../managers/modal-manager.js";
-import { createDialog, createBackground } from "../helpers/modal-helpers.js";
 
 class Modal
 {
@@ -17,20 +16,20 @@ class Modal
     #onloadfunc = function (ev) { };
     #onclosefunc = function (ev) { };
 
-    constructor (name, view = "default", x = 600, y = 400)
+	constructor (name, view = "default", x = 'auto', y = 'auto')
     {
         this.#name = name;
         this.#view = view;
         this.#point = new Point(x, y);
 
-        this.#root = createDialog(name, this.#point);
-		this.#background = createBackground();
+		this.#createRoot();
+		this.#createBackground();
 
 		this.#fetchContent();
-
-		this.#root.open = true;
-
         this.#setControls();
+
+		this.#background.appendChild(this.#root);
+		this.#root.open = true;
 
         ModalManager.add(this);
     }
@@ -38,7 +37,7 @@ class Modal
 	set zDepth (value)
 	{
 		this.#root.style.zIndex = value;
-		this.zdepth = value;
+		this.#zdepth = value;
 	}
 
     get zDepth ()
@@ -96,6 +95,32 @@ class Modal
 
         this.#onloadfunc();
     }
+
+	#createRoot ()
+	{
+		let root = document.createElement('dialog');
+		root.setAttribute('data-modal-name', this.#name);
+
+		root.style = `
+			max-width: ${this.#point.X};
+			max-height: ${this.#point.Y};
+		`;
+
+		root.classList.add('modal-root');
+
+		this.#root = root;
+	}
+
+	#createBackground ()
+	{
+		let background = document.createElement('div');
+		background.classList.add('modal-background');
+
+		setTimeout(() => background.style.backgroundColor = 'rgba(45, 45, 45, .75)', 0);
+
+		this.#background = background;
+		document.body.appendChild(background);
+	}
 
     #setControls ()
     {

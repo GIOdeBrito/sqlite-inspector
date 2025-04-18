@@ -9,8 +9,6 @@ spl_autoload_register(function ($classname)
 {
 	$abspath = __DIR__.'/../../'.$classname.'.php';
 	$abspath = str_replace('\\', '/', $abspath);
-	$abspath = str_replace('_', '', $abspath);
-	$abspath = strtolower($abspath);
 
 	if(!file_exists($abspath))
 	{

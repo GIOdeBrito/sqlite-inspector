@@ -1,4 +1,9 @@
 <?php
+
+use App\Controllers\Api\Modals;
+
+$router->addRoute('GET', '/api/v1/modal/:modal', [Modals::class, 'returnModalContent']);
+
 /*
 $router->add_route('GET', '/api/v1/database/alltables/', 'DatabaseController::get_table_names');
 
@@ -10,8 +15,6 @@ $router->add_route('GET', '/api/v1/maxuploadsize', function()
 
 	echo json_encode([ 'size' => $size ]);
 });
-
-$router->add_route('GET', '/api/v1/modal/:modal', 'GetModalController::return_modal_content');
 
 $router->add_route('GET', '/api/v1/time', function (Request $req, Response $res): void
 {

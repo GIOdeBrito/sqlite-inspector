@@ -4,7 +4,7 @@ require 'src/helpers/files.php';
 
 class UploadController
 {
-	public static function handle_db_upload (): void
+	public static function handleDbUpload (): void
 	{
 		$file = get_http_files();
 
@@ -17,7 +17,7 @@ class UploadController
 			die();
 		}
 
-		echo json_encode([ 'success' => move_file_touploads($file) ]);
+		echo json_encode([ 'success' => moveFileToUploads($file) ]);
 	}
 }
 

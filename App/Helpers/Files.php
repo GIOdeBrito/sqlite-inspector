@@ -1,13 +1,13 @@
 <?php
 
-function get_file_random_name (string $name): string
+function getFileRandomName (string $name): string
 {
 	$ext = pathinfo($name, PATHINFO_EXTENSION);
 
 	return date('Ymd_his').'.'.$ext;
 }
 
-function get_http_files (): array|object
+function getHttpFiles (): array|object
 {
 	$uploaded_files = $_FILES['uploaded_file'];
 	$filecount = count($uploaded_files['name']);
@@ -38,7 +38,7 @@ function get_http_files (): array|object
 	return $objectarray;
 }
 
-function empty_uploads_folder (): void
+function emptyUploadsFolder (): void
 {
 	$files = glob('../uploads/*.*');
 
@@ -48,7 +48,7 @@ function empty_uploads_folder (): void
 	}
 }
 
-function move_file_touploads (UploadedFileModel $file): bool
+function moveFileToUploads (UploadedFileModel $file): bool
 {
 	if(!is_uploaded_file($file->tempname))
 	{
@@ -56,7 +56,7 @@ function move_file_touploads (UploadedFileModel $file): bool
 	}
 
 	$destination = '../uploads/';
-	$randname = get_file_random_name($file->name);
+	$randname = getFileRandomName($file->name);
 
 	if(!move_uploaded_file($file->tempname, $destination.$randname))
 	{

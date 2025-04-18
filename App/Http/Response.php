@@ -31,7 +31,7 @@ class Response
 		$this->send();
 	}
 
-	public function set_status (int $code)
+	public function setStatus (int $code)
 	{
 		$this->status = $code;
 	}
@@ -78,7 +78,7 @@ class Response
 				// Extract the array key value pair as local variables
 				extract($this->viewparams);
 
-				require "app/template/_layout.php";
+				include "App/Template/_layout.php";
 			}
 			break;
 			case ResponseTypeEnum::JSON:
@@ -88,7 +88,7 @@ class Response
 			break;
 			case ResponseTypeEnum::HTML:
 			{
-				include 'app/views/'.$this->body.'.php';
+				include 'App/Views/'.$this->body.'.php';
 			}
 			break;
 			case ResponseTypeEnum::PLAINTEXT:

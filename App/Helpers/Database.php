@@ -9,7 +9,7 @@ class Database
     {
 		try
         {
-			$this->set_db($name);
+			$this->setDb($name);
 
 			$this->pdo = new PDO("sqlite:".$this->db);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -76,7 +76,7 @@ class Database
 		$this->pdo->rollback();
 	}
 
-	protected function set_db ($name)
+	protected function setDb ($name)
 	{
 		$this->db = $name;
 	}

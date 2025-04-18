@@ -40,7 +40,7 @@ class Request
 	}
 
 	// Checks whether the two routes are the same, also extracts the route parameters
-	public function parse_route (string $route): bool
+	public function parseRoute (string $route): bool
 	{
 		$server_uri_array = explode('/', $route);
 		$req_uri_array = explode('/', $this->uri);

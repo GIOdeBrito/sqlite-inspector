@@ -29,7 +29,7 @@
 	<body>
 		<?php
 
-		include "app/views/${view}.php";
+		include "App/Views/${view}.php";
 
 		?>
 	</body>

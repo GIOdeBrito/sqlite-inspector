@@ -17,7 +17,7 @@ class Router
 		];
 	}
 
-	public function add_route (string $method, string $route, object|string|array $callback): void
+	public function addRoute (string $method, string $route, object|string|array $callback): void
 	{
 		if(!array_key_exists($method, $this->routes))
 		{
@@ -36,7 +36,7 @@ class Router
 		$this->routes[$method][$route] = $callback;
 	}
 
-	public function handle_request (Request $req, Response $res): void
+	public function call (Request $req, Response $res): void
 	{
 		// Checks if the request method does exist in the router
 		if(!array_key_exists($req->method, $this->routes))
@@ -49,7 +49,7 @@ class Router
 		// Looks for the registered route
 		foreach($this->routes[$req->method] as $key => $value)
 		{
-			if(!$req->parse_route($key, $req->uri))
+			if(!$req->parseRoute($key, $req->uri))
 			{
 				continue;
 			}
